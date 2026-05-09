@@ -1,0 +1,22 @@
+artifact_path: file:C:/Users/kpaoi/Porfolio/Automated Model Monitoring & Drift Detection/mlflow_runs/311827224100509265/models/m-675336248fed4b099c45b344b7cac8e9/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.14.0
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.2.0
+mlflow_version: 3.12.0
+model_id: m-675336248fed4b099c45b344b7cac8e9
+model_size_bytes: 879685
+model_uuid: m-675336248fed4b099c45b344b7cac8e9
+prompts: null
+run_id: e793d829ee6347c19bd13a627aed69f7
+utc_time_created: '2026-05-09 03:17:55.098786'

@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/kpaoi/Porfolio/Automated Model Monitoring & Drift Detection/mlflow_runs/311827224100509265/1b6b7dba8fde423f801d9b0da7834406/artifacts
+end_time: 1778296864494
+entry_point_name: ''
+experiment_id: '311827224100509265'
+lifecycle_stage: active
+run_id: 1b6b7dba8fde423f801d9b0da7834406
+run_name: monitoring_week_05
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778296864330
+status: 3
+tags: []
+user_id: HP
