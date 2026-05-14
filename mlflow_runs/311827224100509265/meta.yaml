@@ -1,9 +1,0 @@
-artifact_location: file:C:/Users/kpaoi/Porfolio/Automated Model Monitoring & Drift
-  Detection/mlflow_runs/311827224100509265
-creation_time: 1778296663900
-experiment_id: '311827224100509265'
-last_update_time: 1778296663900
-lifecycle_stage: active
-name: fraud_monitoring
-trace_location: null
-workspace: default

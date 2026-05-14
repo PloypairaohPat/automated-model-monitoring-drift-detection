@@ -20,3 +20,9 @@ Thumbs.db
 
 # Claude
 .claude/
+
+# MLflow tracking store — local only, do not version
+mlflow_runs/
+
+# Allow the dashboard's input CSV through the *.csv block
+!outputs/monitoring_results.csv
