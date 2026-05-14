@@ -71,8 +71,10 @@ fig2.add_trace(go.Bar(
     marker_color=bar_colours,
     name="Max PSI",
 ))
-fig2.add_hline(y=0.10, line_dash="dot", line_color="orange", annotation_text="Warning (0.10)")
-fig2.add_hline(y=0.20, line_dash="dash", line_color="red", annotation_text="Critical (0.20)")
+fig2.add_hline(y=0.10, line_dash="dot", line_color="orange",
+               annotation_text="Warning (0.10)", annotation_position="bottom right")
+fig2.add_hline(y=0.20, line_dash="dash", line_color="red",
+               annotation_text="Critical (0.20)", annotation_position="top left")
 fig2.update_layout(
     xaxis_title="Production Week", yaxis_title="Max PSI",
     height=300, xaxis=dict(dtick=1),
