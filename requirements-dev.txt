@@ -1,0 +1,23 @@
+# Full pipeline dependencies for local development.
+# Streamlit Cloud uses requirements.txt (dashboard-only). This file is for
+# running train.py, simulate_production.py, monitor.py, and the Airflow DAG.
+
+# Dashboard (also in requirements.txt — kept here for one-shot install)
+streamlit>=1.30
+pandas>=2.0
+plotly>=5.18
+
+# Training & evaluation
+scikit-learn>=1.3
+xgboost>=2.0
+numpy>=1.24
+matplotlib>=3.7
+
+# Monitoring & drift detection
+evidently>=0.4
+
+# Experiment tracking
+mlflow>=2.10
+
+# Orchestration (Linux/WSL/Docker only — not native Windows)
+apache-airflow>=2.8
