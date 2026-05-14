@@ -1,10 +1,31 @@
 # Automated Model Monitoring & Drift Detection
 
+### 🚀 [**Live Dashboard →**](https://fraud-drift-monitor.streamlit.app/)
+
 **MLOps capstone project** — A complete production monitoring system for a deployed ML model.
 Detects data drift using PSI + KS test, tracks model performance over 12 simulated weeks,
 and fires configurable alerts via an Airflow-orchestrated pipeline.
 
 **Stack:** Python · Evidently AI · MLflow · Apache Airflow · Streamlit · XGBoost
+
+---
+
+## Live Dashboard
+
+**[https://fraud-drift-monitor.streamlit.app/](https://fraud-drift-monitor.streamlit.app/)**
+
+[![Streamlit Dashboard — CRITICAL alert status, F1 = 0.9285, Max PSI = 2.958](assets/streamlit_dashboard_kpis.png)](https://fraud-drift-monitor.streamlit.app/)
+
+The dashboard surfaces alert status, F1 trend, PSI per week, and the latest Evidently
+drift report. As of the most recent batch, PSI = **2.958** (15× the CRITICAL threshold)
+across **4 drifted features** — while F1 sits at **0.93**, comfortably above the 0.80
+performance alert threshold. This is the **leading-indicator gap** the system was built
+to close: PSI detects the shift weeks before any performance metric notices.
+
+![F1 stays flat in the 0.91–1.00 band while PSI climbs from 0.004 to 2.96](assets/streamlit_dashboard_charts.png)
+
+*Flat blue F1 line, exploding red PSI bars — the central finding of this project on
+imbalanced classification.*
 
 ---
 
@@ -15,7 +36,7 @@ and fires configurable alerts via an Airflow-orchestrated pipeline.
   macro-F1 stays silent across all 12 weeks (the central finding of this project)
 - Full MLflow experiment tracking across training and 12 weekly monitoring runs
 - Airflow DAG operationalising monitoring into a scheduled, observable pipeline
-- Live Streamlit dashboard with F1 trend, drift heatmap, and embedded Evidently reports
+- Live Streamlit dashboard with F1 trend, PSI per week, alert log, and embedded Evidently reports
 - Operational runbook translating ML alerts into actionable investigation procedures
 
 ---
@@ -43,9 +64,10 @@ model_monitoring/
 │   ├── monitoring_results.csv  # Aggregated weekly metrics for the dashboard
 │   ├── drift_timeline.png      # Key portfolio chart
 │   └── alert_log.jsonl         # Machine-readable alert history
-├── mlflow_runs/                # MLflow tracking store (auto-created)
+├── assets/                     # README screenshots
 ├── runbook.md                  # Operational runbook
-└── requirements.txt
+├── requirements.txt            # Dashboard-only deps (Streamlit Cloud)
+└── requirements-dev.txt        # Full pipeline deps (local development)
 ```
 
 ---
@@ -88,7 +110,7 @@ performance metrics** — and stayed silent across the first four stable weeks.
 - CRITICAL fired at Week 6 (PSI = 0.201, threshold 0.20) — one week after WARNING
 - Macro-F1 stayed in the **0.91–1.00 band the entire run**, never crossing the F1 alert threshold of 0.80
 
-![Drift Timeline](outputs/drift_timeline.png)
+![Drift Timeline — F1 vs Max PSI across 12 weeks](outputs/drift_timeline.png)
 
 ### Why F1 didn't move — and why that's the interesting finding
 
@@ -112,6 +134,10 @@ rare-event problems it is the only reliable early-warning signal.
 ## Quick Start
 
 ```bash
+# Full pipeline (training, simulation, monitoring, dashboard)
+pip install -r requirements-dev.txt
+
+# OR — dashboard only (same as Streamlit Cloud)
 pip install -r requirements.txt
 
 # Place creditcard.csv in data/ (download from Kaggle)
@@ -195,7 +221,7 @@ the monitoring loop, not ship a managed service.
 - Built an automated ML monitoring system using Evidently AI to detect data drift (KS test +
   PSI) across 12 simulated weekly production batches on the Credit Card Fraud dataset (0.17%
   positive class), with configurable alerting at PSI > 0.10 (warning) and PSI > 0.20 (critical),
-  scheduled via an Apache Airflow DAG.
+  scheduled via an Apache Airflow DAG and surfaced through a live Streamlit Cloud dashboard.
 
 - Demonstrated that input-distribution monitoring is the only reliable early-warning signal
   on heavily imbalanced classification: PSI detected drift at Week 5 and rose 800× across
@@ -203,6 +229,7 @@ the monitoring loop, not ship a managed service.
   and never crossed performance alert thresholds — quantifying why production ML on
   rare-event problems cannot rely on performance metrics alone.
 
-- Delivered a Streamlit monitoring dashboard with F1 trend, feature drift heatmap, and
-  embedded Evidently HTML reports, alongside an operational runbook translating MLOps alerts
-  into actionable investigation and retraining criteria for non-ML stakeholders.
+- Delivered a live Streamlit monitoring dashboard ([fraud-drift-monitor.streamlit.app](https://fraud-drift-monitor.streamlit.app/))
+  with F1 trend, PSI per week, alert log, and embedded Evidently HTML reports, alongside an
+  operational runbook translating MLOps alerts into actionable investigation and retraining
+  criteria for non-ML stakeholders.
